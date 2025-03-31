@@ -1,0 +1,17 @@
+{
+    "$schema": "https://schemas.reqnroll.net/reqnroll-config-latest.json",
+    "unitTestProvider": {
+        "name": "xUnit"
+    },
+    "buildOptions": {
+        "copyToOutputDirectory": "Always"
+    },
+    "runtime": {
+        "missingOrPendingStepsOutcome": "Error"
+    },
+    "bindingAssemblies": [
+        {
+            "assembly": "AutofacSeparatedFeatureSteps"
+        }
+    ]
+}
