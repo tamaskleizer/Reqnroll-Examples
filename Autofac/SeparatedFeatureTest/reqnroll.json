@@ -11,7 +11,7 @@
     },
     "bindingAssemblies": [
         {
-            "assembly": "AutofacSeparatedFeatureSteps"
+            "assembly": "SeparatedFeatureSteps"
         }
     ]
 }

@@ -5,12 +5,15 @@
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
     <IsPackable>false</IsPackable>
+    <RootNamespace>ReqnrollExamples.Autofac.SeparatedFeatureTest</RootNamespace>
   </PropertyGroup>
 
   <ItemGroup>
     <PackageReference Include="coverlet.collector" Version="6.0.2" />
+
     <PackageReference Include="Reqnroll" Version="2.4.0" />
     <PackageReference Include="Reqnroll.xUnit" Version="2.4.0" />
+    <PackageReference Include="Reqnroll.Autofac" Version="2.4.0" />
     <PackageReference Include="xunit" Version="2.9.2" />
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.12.0" />
     <PackageReference Include="xunit.runner.visualstudio" Version="3.0.2">
@@ -21,6 +24,12 @@
 
   <ItemGroup>
     <ProjectReference Include="..\SeparatedFeatureSteps\SeparatedFeatureSteps.csproj" />
+    <!-- not used directly, just to ensure it's copied -->
+    <ProjectReference Include="..\SeparatedDrivers\SeparatedDrivers.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="reqnroll.json" CopyToOutputDirectory="PreserveNewest" />
   </ItemGroup>
 
 </Project>
