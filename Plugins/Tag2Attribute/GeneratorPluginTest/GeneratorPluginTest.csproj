@@ -17,12 +17,12 @@
     </PackageReference>
   </ItemGroup>
 
-  <!-- Copy the plugin to the output directory of the test project -->
-  <Target Name="CopyGeneratorPlugin" AfterTargets="Build">
-    <ItemGroup>
-      <Copy SourceFile="..\GeneratorPlugin\bin\$(Configuration)\$(TargetFramework)\GeneratorPlugin.dll" DestinationFolder="$(OutputPath)" SkipUnchangedFiles="true" />
-    </ItemGroup>
-  </Target>
+  <!-- It's recommended to use this as a nuget package when possible -->
+  <ItemGroup>
+    <Reference Include="GeneratorPlugin">
+      <HintPath>..\GeneratorPlugin\bin\$(Configuration)\$(TargetFramework)\GeneratorPlugin.dll</HintPath>
+    </Reference>
+  </ItemGroup>
 
   <!-- Tell reqnroll to use the plugin during code generation-->
   <ItemGroup>

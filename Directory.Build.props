@@ -1,0 +1,5 @@
+<Project>
+  <PropertyGroup>
+    <NuGetConfigFile>$(MSBuildThisFileDirectory)NuGet.config</NuGetConfigFile>
+  </PropertyGroup>
+</Project>

@@ -1,0 +1,8 @@
+<Project>
+
+  <!-- Inject the value into the consumer of the package -->
+  <ItemGroup>
+    <ReqnrollGeneratorPlugins Include="$(_TestMethodGeneratorPlugin)" />
+  </ItemGroup>
+
+</Project>

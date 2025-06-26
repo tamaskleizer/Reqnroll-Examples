@@ -1,0 +1,41 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <IsPackable>true</IsPackable>
+    <Version>1.0.0</Version>
+    <RootNamespace>ReqnrollExamples.Plugins.TestMethodAttribute.TestMethodGeneratorPlugin</RootNamespace>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Reqnroll.CustomPlugin" Version="2.4.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="TestMethodGeneratorPlugin.targets" Pack="true" PackagePath="build/TestMethodGeneratorPlugin.targets" />
+    <Content Include="TestMethodGeneratorPlugin.props" Pack="true" PackagePath="build/TestMethodGeneratorPlugin.props" />
+  </ItemGroup>
+
+  <!-- SolutionDir is not defined by the build process when the target framework is "netstandard2.0"
+      * This is a workaround to define it manually.
+      * It is used to find the publish directory for the local NuGet source.
+   -->
+  <PropertyGroup>
+    <SolutionDir>$(MSBuildThisFileDirectory)../../../</SolutionDir>
+  </PropertyGroup>
+
+  <!-- Packing and pushing to a local Nuget source
+      * This stage runs after the build process.
+      * It packs the project and pushes the generated package to a local NuGet source.
+      * The local source is created if it does not exist.
+      * The NuGetConfigFile property is used to specify the NuGet configuration file (imported from $(SolutionDir)Directory.Build.props file).
+      * In a real-world scenario, you would typically use a CI/CD pipeline to handle the packaging and pushing of NuGet packages.
+   -->
+  <Target Name="PackAndPush" AfterTargets="Build">
+    <Exec Command="dotnet pack --configuration $(Configuration) --include-symbols --include-source --no-build --output $(OutputPath)" />
+    <MakeDir Directories="$(SolutionDir)publish" Condition="!Exists('$(SolutionDir)publish')" />
+    <Exec Command="dotnet nuget list source --configfile $(NuGetConfigFile) | findstr LocalPublish || dotnet nuget add source $(SolutionDir)publish --name LocalPublish --configfile $(NuGetConfigFile)" Condition=" '$(NuGetConfigFile)' != '' " />
+    <Exec Command="dotnet nuget push $(OutputPath)TestMethodGeneratorPlugin.$(Version).nupkg --source LocalPublish" />
+  </Target>
+
+</Project>

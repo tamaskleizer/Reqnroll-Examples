@@ -1,0 +1,61 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+        "label": "build plugins",
+        "dependsOn": [
+            "clear nuget cache",
+            "build Tag2Attribute",
+            "build TestMethodAttribute"
+        ],
+        "dependsOrder": "sequence",
+        "presentation": {
+            "reveal": "always",
+            "panel": "shared"
+        }
+    },
+    {
+        "label": "clear nuget cache",
+        "command": "dotnet nuget locals all --clear; exit 0",
+        "type": "shell",
+        "presentation": {
+            "panel": "shared"
+        }
+    },
+    {
+        "label": "build Tag2Attribute",
+        "command": "dotnet",
+        "type": "process",
+        "args": [
+            "build",
+            "${workspaceFolder}/Plugins/Tag2Attribute/GeneratorPlugin/GeneratorPlugin.csproj"
+        ]
+    },
+    {
+        "label": "build TestMethodAttribute",
+        "command": "dotnet",
+        "type": "process",
+        "args": [
+            "build",
+            "${workspaceFolder}/Plugins/TestMethodAttribute/TestMethodGeneratorPlugin/TestMethodGeneratorPlugin.csproj"
+        ]
+    },
+    {
+        "label": "build solution",
+        "command": "dotnet",
+        "type": "process",
+        "args": [
+            "build",
+            "${workspaceFolder}/Reqnroll-Examples.sln"
+        ],
+        "problemMatcher": "$msCompile",
+        "group": {
+            "kind": "build",
+            "isDefault": true
+        },
+        "dependsOn": [
+            "build plugins"
+        ]
+    }
+  ]
+}
