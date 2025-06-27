@@ -20,6 +20,9 @@
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
+
+    <!-- Workaround to have Visual Studio Code Testing detect the tests -->
+    <PackageReference Include="MSTest.TestAdapter" Version="3.9.3" />
   </ItemGroup>
 
   <ItemGroup>
